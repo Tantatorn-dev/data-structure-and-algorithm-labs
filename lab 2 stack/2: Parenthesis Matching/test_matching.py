@@ -5,15 +5,15 @@ myStack = stack.Stack()
 err = False
 
 for char in myStr:
-    if char == "(" or char == "{" or char == "[":
+    if char == '(' or char == '{' or char == '[':
         myStack.push(char)
-    elif char == ")" or char == "}" or char == "]":
+    elif char == ')' or char == '}' or char == ']':
         if myStack.isEmpty():
             err = True
         else:
             op = myStack.pop()
-            if op != char:
-                err = False
+            if not ((op == '(' and char == ')') or (op == '[' and char == ']') or (op == '{' and char == '}')):
+                err = True
 
 if err:
     print("MISMATCH")
