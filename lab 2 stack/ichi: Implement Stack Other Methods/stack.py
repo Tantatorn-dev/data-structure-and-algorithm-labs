@@ -4,11 +4,22 @@ class Stack:
         if list == None:
             self.items = []
         else:
-            self.items=list
-    
-    def push(self,item):
+            self.items = list
+
+    def push(self, item):
         self.items.append(item)
-    
+
     def pop(self):
         self.items.pop()
 
+    def size(self):
+        return len(self.items)
+
+    def isEmpty(self):
+        if self.items == []:
+            return True
+        else:
+            return False
+
+    def peek(self):
+        return self.items[len(self.items)-1]
