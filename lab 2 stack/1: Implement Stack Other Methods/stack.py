@@ -16,10 +16,7 @@ class Stack:
         return len(self.items)
 
     def isEmpty(self):
-        if self.items == []:
-            return True
-        else:
-            return False
+        return self.items == []
 
     def peek(self):
-        return self.items[len(self.items)-1]
+        return self.items[-1]

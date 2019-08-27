@@ -18,21 +18,26 @@ class CarStack:
             self.availableSpace -= 1
         print("car %d arrive       space left %d" % (car, self.availableSpace))
 
-    def depart(self, carIndex):
+    def depart(self, carNumber):
         if len(self.mySoi) == 0:
             print("car %d cannot depart : soi empty" % (self.maxSpace+1))
             return
-        if carIndex>self.maxSpace-1:
-            print("car %d cannot depart : No car %d" % (carIndex,carIndex))
-            return
-        for i in range(len(self.mySoi)-carIndex-1):
-            self.neighbourSoi.append(self.mySoi.pop())
-        departed_car = self.mySoi.pop()
+        isin = False
+        for i in range(len(self.mySoi)):
+            outCar = self.mySoi.pop()
+            if  outCar== carNumber:
+                isin = True
+                break
+            else:
+                self.neighbourSoi.append(outCar)
         for i in range(len(self.neighbourSoi)):
             self.mySoi.append(self.neighbourSoi.pop())
-        self.availableSpace += 1
-        print("car %d depart      space left %d" %
-              (departed_car, self.availableSpace))
+        if isin:
+            self.availableSpace += 1
+            print("car %d depart      space left %d" %
+              (carNumber, self.availableSpace))
+        else:
+            print("car %d cannot depart: no car %d"%(carNumber,carNumber))
 
     def isFull(self):
         return len(self.mySoi) == self.availableSpace
