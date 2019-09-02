@@ -10,6 +10,9 @@ print(myList.size())
 print(myList.isIn("Gundam"))
 print(myList.before("Gundam"))
 
+myList.insert("Zaku I","GM 2")
+print(myList)
+
 myList.removeHead()
 myList.removeTail()
 print(myList)

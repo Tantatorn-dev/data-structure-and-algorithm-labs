@@ -72,3 +72,13 @@ class List:
     
     def removeHead(self):
         self.head = self.head.next
+
+    def insert(self,beforeData,data):
+        current = self.head
+        while current != None:
+            if current.data == beforeData:
+                temp = current.next
+                current.next = node.Node(data)
+                current.next.next = temp 
+                return
+            current = current.next
