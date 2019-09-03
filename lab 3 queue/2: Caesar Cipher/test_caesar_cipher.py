@@ -1,8 +1,7 @@
 import caesar_cipher as cc
 
-myI = [1,2,3,4]
-
-text=cc.encode("hello moto",myI)
+myI = [1,1,1,1]
+text=cc.encode("Zeta Zeza Mario",myI)
 
 print(text)
 
