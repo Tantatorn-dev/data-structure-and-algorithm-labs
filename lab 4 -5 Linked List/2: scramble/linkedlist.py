@@ -2,6 +2,7 @@ import node
 
 # this is LinkedList naja
 
+
 class List:
 
     def __init__(self, head=None):
@@ -34,9 +35,9 @@ class List:
         list_str = []
         current = self.head
         while current != None:
-            list_str.append(current.data)  
+            list_str.append(current.data)
             current = current.next
-        return  list_str.__str__()
+        return list_str.__str__()
 
     def isIn(self, data):
         current = self.head
@@ -54,14 +55,14 @@ class List:
             current = current.next
         return None
 
-    def remove(self,data):
+    def remove(self, data):
         current = self.head
         while current != None:
             if current.next.data == data:
                 current.next = current.next.next
                 return
             current = current.next
-    
+
     def removeTail(self):
         current = self.head
         while current != None:
@@ -69,16 +70,35 @@ class List:
                 current.next = None
                 return
             current = current.next
-    
+
     def removeHead(self):
         self.head = self.head.next
 
-    def insert(self,beforeData,data):
+    def insert(self, beforeData, data):
         current = self.head
         while current != None:
             if current.data == beforeData:
                 temp = current.next
                 current.next = node.Node(data)
-                current.next.next = temp 
+                current.next.next = temp
                 return
             current = current.next
+
+    def bottomUp(self, percent):
+        size = self.size()
+        amount = int(size * percent/100)
+        temp = self.head
+
+        for i in range(0,amount):
+            self.head = self.head.next
+
+
+        current = self.head
+
+        for i in range(1,size-amount):
+            current = current.next
+
+        current.next = temp
+        for i in range(1,amount):
+            temp = temp.next
+        temp.next = None
