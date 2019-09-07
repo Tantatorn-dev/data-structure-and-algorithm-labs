@@ -84,21 +84,45 @@ class List:
                 return
             current = current.next
 
+    def insertByIndex(self,index,data):
+        current = self.head
+        for i in range(index):
+            current = current.next
+        temp = current.next
+        current.next = node.Node(data)
+        current.next.next = temp
+
     def bottomUp(self, percent):
         size = self.size()
         amount = int(size * percent/100)
         temp = self.head
 
-        for i in range(0,amount):
+        for i in range(0, amount):
             self.head = self.head.next
-
 
         current = self.head
 
-        for i in range(1,size-amount):
+        for i in range(1, size-amount):
             current = current.next
 
         current.next = temp
-        for i in range(1,amount):
+        for i in range(1, amount):
             temp = temp.next
         temp.next = None
+
+    def riffle(self, percent):
+        size = self.size()
+        amount = int(size * percent/100)
+
+        current = self.head
+        for i in range(1, amount):
+            current = current.next
+
+        temp = current
+        current = current.next
+        for i in range(0, 2*(size-amount),2):
+            print(current.data)
+            self.insertByIndex(i, current.data)
+            current = current.next
+        temp.next = None
+

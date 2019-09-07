@@ -8,3 +8,6 @@ for i in range(2,11):
 print(myList)
 myList.bottomUp(30)
 print(myList)
+
+myList.riffle(60)
+print(myList)
