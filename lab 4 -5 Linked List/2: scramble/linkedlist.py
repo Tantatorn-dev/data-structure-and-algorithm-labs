@@ -115,15 +115,29 @@ class List:
 
     def riffle(self, percent):
         size = self.size()
+        if percent <50:
+            percent = 100 -percent
         amount = int(size * percent/100)
 
         current = self.head
         for i in range(1, amount):
             current = current.next
+        
+        # cut the list
+        newHead = current.next
+        current.next =None
 
-        start = self.head
-        for i in range(0, size-amount):
-            current = current.next
-            temp = start.next
-            start.next = node.Node(current.data)
-            start = temp
+        current = self.head
+        count = size - amount
+        while current != None:
+            if count > 0 :
+                temp1 = newHead.next
+                newHead.next = None
+                temp2 =current.next
+                current.next = newHead
+                current.next.next = temp2
+                current =current.next.next
+                newHead = temp1
+                count -= 1
+            else:
+                current = current.next
