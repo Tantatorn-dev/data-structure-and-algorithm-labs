@@ -2,7 +2,7 @@ import linkedlist
 
 myList = linkedlist.List("Zaku I")
 
-myList.append("Zaku 2")
+myList.append("Zaku II")
 myList.append("Gundam")
 
 print(myList)
@@ -17,3 +17,5 @@ myList.removeHead()
 myList.removeTail()
 print(myList)
 
+myList.addHead("Sazabi")
+print(myList)

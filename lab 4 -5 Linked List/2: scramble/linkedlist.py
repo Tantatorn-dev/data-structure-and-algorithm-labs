@@ -72,7 +72,10 @@ class List:
             current = current.next
 
     def removeHead(self):
-        self.head = self.head.next
+        if self.head == None:
+            return
+        else:
+            self.head = self.head.next
 
     def insert(self, beforeData, data):
         current = self.head
@@ -84,12 +87,12 @@ class List:
                 return
             current = current.next
 
-    def insertByIndex(self,index,data):
+    def insertByIndex(self, index, node):
         current = self.head
         for i in range(index):
             current = current.next
         temp = current.next
-        current.next = node.Node(data)
+        current.next = node
         current.next.next = temp
 
     def bottomUp(self, percent):
@@ -118,11 +121,9 @@ class List:
         for i in range(1, amount):
             current = current.next
 
-        temp = current
-        current = current.next
-        for i in range(0, 2*(size-amount),2):
-            print(current.data)
-            self.insertByIndex(i, current.data)
+        start = self.head
+        for i in range(0, size-amount):
             current = current.next
-        temp.next = None
-
+            temp = start.next
+            start.next = node.Node(current.data)
+            start = temp
