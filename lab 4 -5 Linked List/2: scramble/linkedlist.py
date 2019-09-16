@@ -5,11 +5,15 @@ import node
 
 class List:
 
+    # 0 : bottomUp
+    # 1 : riffle
+
     def __init__(self, head=None):
         if head == None:
             self.head = None
         else:
             self.head = node.Node(head)
+        self.history = []
 
     def addHead(self, head):
         self.head = node.Node(head)
@@ -63,6 +67,16 @@ class List:
                 return
             current = current.next
 
+    def pullOut(self, data):
+        current = self.head
+        while current != None:
+            if current.next.data == data:
+                temp = current.next
+                current.next = current.next.next
+                temp.next = None
+                return temp
+            current = current.next
+
     def removeTail(self):
         current = self.head
         while current != None:
@@ -98,6 +112,8 @@ class List:
     def bottomUp(self, percent):
         size = self.size()
         amount = int(size * percent/100)
+        self.history.append([0, percent])
+
         temp = self.head
 
         for i in range(0, amount):
@@ -115,29 +131,61 @@ class List:
 
     def riffle(self, percent):
         size = self.size()
-        if percent <50:
-            percent = 100 -percent
+        self.history.append([1, percent])
+
+        if percent < 50:
+            percent = 100 - percent
         amount = int(size * percent/100)
 
         current = self.head
         for i in range(1, amount):
             current = current.next
-        
+
         # cut the list
         newHead = current.next
-        current.next =None
+        current.next = None
 
         current = self.head
         count = size - amount
         while current != None:
-            if count > 0 :
+            if count > 0:
                 temp1 = newHead.next
                 newHead.next = None
-                temp2 =current.next
+                temp2 = current.next
                 current.next = newHead
                 current.next.next = temp2
-                current =current.next.next
+                current = current.next.next
                 newHead = temp1
                 count -= 1
             else:
+                current = current.next
+
+    def deBottomUp(self,percent):
+        percent = 100 - percent
+        self.bottomUp(percent)
+
+    def addTail(self,node):
+
+        current = self.head
+        while current.next != None:
+            current = current.next
+        current.next = node
+
+    def deRiffle(self,percent):
+
+        size = self.size()
+        amount = int(size*percent/100)
+
+        current = self.head
+        index = 1
+        count = 0
+        while current != None:
+            if index % 2 == 0 and count<size-amount:
+                temp = current.next.next
+                target = self.pullOut(current.data)
+                self.addTail(target)
+                count += 1 
+                current = temp
+            else:
+                index += 1
                 current = current.next

@@ -1,13 +1,14 @@
-import linkedlist 
+import linkedlist
+import node
 
 myList = linkedlist.List(1)
 
-for i in range(2,11):
+for i in range(2, 11):
     myList.append(i)
 print(myList)
 
-myList.bottomUp(30)
+myList.riffle(60)
 print(myList)
 
-myList.riffle(60)
+myList.deRiffle(60)
 print(myList)
