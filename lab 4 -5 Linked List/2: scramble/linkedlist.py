@@ -174,6 +174,8 @@ class List:
     def deRiffle(self,percent):
 
         size = self.size()
+        if percent < 50:
+            percent = 100 - percent
         amount = int(size*percent/100)
 
         current = self.head
