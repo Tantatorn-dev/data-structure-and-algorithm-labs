@@ -43,4 +43,23 @@ def evalPostfix(expression: str) -> int:
             stack.push(ch)
     return int(stack.items.pop())
 
+
+def prefixToInfix(expression: str) -> str:
+    expression = expression[::-1]
+    stack = Stack()
+    for ch in expression:
+        if ch == '+' or ch == '-' or ch == '*' or ch == '/':
+            a = stack.pop()
+            b = stack.pop()
+            out = '(' + a+ch+b+')'
+            stack.push(out)
+        else:
+            stack.push(ch)
+    return stack.pop()
+
+
 print(evalPostfix("138*+"))
+
+print(prefixToInfix("*+AB-CD"))
+
+# practice, practice, and practice
