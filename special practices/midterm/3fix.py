@@ -57,7 +57,6 @@ def prefixToInfix(expression: str) -> str:
             stack.push(ch)
     return stack.pop()
 
-
 print(evalPostfix("138*+"))
 
 print(prefixToInfix("*+AB-CD"))

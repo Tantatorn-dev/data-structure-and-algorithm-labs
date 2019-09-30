@@ -41,7 +41,7 @@ class CarStack:
 
     def isFull(self):
         return len(self.mySoi) == self.availableSpace
-
+    
     def getAvailableSpace(self):
         return len(self.mySoi)
 
