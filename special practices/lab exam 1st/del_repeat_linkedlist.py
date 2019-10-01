@@ -45,3 +45,5 @@ for item in arr:
 printList(myList)
 delRepeat(myList)
 printList(myList)
+
+# Work harder
