@@ -5,7 +5,7 @@ class Stack:
     def __str__(self):
         text = ""
         temp = self.items[::-1]
-        for i in items:
+        for i in self.items:
             text += str(i)
         return text
 
@@ -26,46 +26,69 @@ class Stack:
         self.items.append(temp)
         return temp
 
+def split(text):
+    return [c for c in text]
 
-def precedence(c):
-    if c=='+' or c=='-':
-        return 1
-    elif c=='*' or c=='/':
-        return 2
-    elif c=='(' or c==')':
-        return 0
 
-def infix_to_postfix(text):
-    postfix=""
-    stack = Stack()
+def infix_to_postfix(infixexpr):
+    prec = {}
+    prec["*"] = 3
+    prec["/"] = 3
+    prec["+"] = 2
+    prec["-"] = 2
+    prec["("] = 1
+    opStack = Stack()
+    postfixList = []
+    tokenList = split(infixexpr)
 
-    for ch in text:
-        if (ch in "123456789"):
-            postfix += ch
-        elif ch =='(':
-            stack.push('(')
-        elif ch==')':
-            while((not stack.isEmpty()) and stack.peek() !='('):
-                a=stack.pop()
-                postfix += a
-            if (not stack.isEmpty() and stack.peek() != '('):
-                return -1
-            else:
-                stack.pop()
+    for token in tokenList:
+        if token in "ABCDEFGHIJKLMNOPQRSTUVWXYZ" or token in "ABCDEFGHIJKLMNOPQRSTUVWXYZ".lower() or token in "0123456789":
+            postfixList.append(token)
+        elif token == '(':
+            opStack.push(token)
+        elif token == ')':
+            topToken = opStack.pop()
+            while topToken != '(':
+                postfixList.append(topToken)
+                topToken = opStack.pop()
         else:
-            while(not stack.isEmpty() and precedence(ch) <= precedence(stack.peek())):
-                postfix += stack.pop()
-            stack.push(ch)
-        
-    while not stack.isEmpty():
-        postfix += (stack.pop())
-    
-    return postfix
+            while (not opStack.isEmpty()) and \
+                    (prec[opStack.peek()] >= prec[token]):
+                postfixList.append(opStack.pop())
+            opStack.push(token)
 
+    while not opStack.isEmpty():
+        postfixList.append(opStack.pop())
+    return "".join(postfixList)
 
+def evalPostfix(expr):
+    stack = Stack()
+    for c in expr:
+        if (c in "+-*/"):
+            a = stack.pop()
+            b = stack.pop()
+            if c=='+':
+                stack.push(int(a)+int(b))
+            elif c=='-':
+                stack.push(int(a)-int(b))
+            elif c=='*':
+                stack.push(int(a)*int(b))
+            elif c=='/':
+                stack.push(int(a)/int(b))
+        else:
+            stack.push(c)
+    return stack.pop()
 
-  
-
+def postfix_to_infix(expr):
+    stack= Stack()
+    for c in expr:
+        if (c in "+-*/"):
+            a = stack.pop()
+            b = stack.pop()
+            stack.push('('+b+c+a+')')                     
+        else:
+            stack.push(c)
+    return stack.pop()
 
 def findNumOperation(text):
     count = 0
@@ -91,3 +114,4 @@ print("Number of operation : ", end="")
 print(findNumOperation(inExpression))
 print("Number of operand : ", end="")
 print(findNumOperand(inExpression))
+print(postfix_to_infix(infix_to_postfix(inExpression)))
