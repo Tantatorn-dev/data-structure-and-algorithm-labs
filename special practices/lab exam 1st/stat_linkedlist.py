@@ -52,7 +52,7 @@ class LinkedList:
         elif self.head.data >= data:
             temp = self.head
             self.head = self.Node(data)
-            self.head.next = temp 
+            self.head.next = temp
 
         else:
 
@@ -71,47 +71,59 @@ class LinkedList:
         res = 0
         while current != None:
             res += current.data
-            current =current.next
+            current = current.next
         return res/len(self)
-    
+
     def getMode(self):
         amount = {}
         current = self.head
-        while current!=None:
+        while current != None:
             amount[current.data] = 0
             current = current.next
 
         current = self.head
-        while current!=None:
+        while current != None:
             amount[current.data] += 1
             current = current.next
 
-        res=[]
+        res = []
         max_count = 0
         for item in amount:
-            if amount[item]>max_count:
+            if amount[item] > max_count:
                 max_count = amount[item]
-        
+
         for item in amount:
             if amount[item] == max_count:
                 res.append(item)
 
         return res
-    
+
     def getMedian(self):
-        pass
+        current = self.head
+        lead = self.head
+        if len(self) % 2 == 0:
+            while lead.next.next != None:
+                lead = lead.next.next
+                current = current.next
+                return (current.next.data + current.next.next.data)/2
+        else:
+            while lead.next != None:
+                lead = lead.next.next
+                current = current.next
+            return current.data
+
 
 ll = LinkedList()
 ll.add(3)
+ll.add(4)
 ll.add(5)
-ll.add(5)
-ll.add(5)
-ll.add(1)
-ll.add(1)
-ll.add(1)
+ll.add(6)
+ll.add(7)
 ll.add(8)
 ll.add(9)
+ll.add(1)
 print(ll)
 print(ll)
 print(ll.getMean())
 print(ll.getMode())
+print(ll.getMedian())
