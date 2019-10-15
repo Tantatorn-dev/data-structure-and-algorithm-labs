@@ -27,6 +27,8 @@ def fib(n):
         return 1
     return fib(n-1)+fib(n-2)
 
+def binarySearch(lo,hi,x,l):
+    pass
 # not enough! must push myself harder
 
 print(fac(3))
