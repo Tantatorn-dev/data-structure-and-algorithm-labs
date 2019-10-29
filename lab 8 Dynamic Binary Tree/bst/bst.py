@@ -136,7 +136,7 @@ class BST:
         if data < root.data:
             root.left = BST._delete(root.left, data)
 
-        elif(data > root.data):
+        elif data > root.data :
             root.right = BST._delete(root.right, data)
 
         else:
@@ -157,6 +157,33 @@ class BST:
 
             root.right = BST._delete(root.right, temp.data)
 
+    def height(self):
+        return BST._height(self.root)
+
+    @staticmethod
+    def _height(root):
+        if not root:
+            return -1
+        else:
+            left = BST._height(root.left)
+            right = BST._height(root.right)
+            if left > right:
+                return left+1
+            else:
+                return right+1
+
+    def depth(self,data):
+        return BST._depth(self.root,data)
+
+    @staticmethod
+    def _depth(root,data):
+        if root is None or root.data == data:
+            return 0
+        if data < root.data:
+            return 1+BST._depth(root.left, data)
+        else:
+            return 1+BST._depth(root.right, data)
+
 
 t = BST()
 t.addI(10)
@@ -166,4 +193,7 @@ t.addI(3)
 t.addI(23)
 t.addI(32)
 t.delete(10)
+t.add(1)
+t.add(4)
 t.printSideway()
+print(t.depth(1))
