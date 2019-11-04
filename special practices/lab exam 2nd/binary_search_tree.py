@@ -95,14 +95,23 @@ def delete(root,data):
         root.right = delete(root.right,root.data)
 
     return root
+
+def printAllLeafNodes(root):
+    if root is None:
+        return
+
+    printAllLeafNodes(root.left)
+    if root.left is None and root.right is None:
+        print(root.data,end=" ")
+    printAllLeafNodes(root.right)
         
 
 
 delete(root,27)
 printSideway(root, 0)
+printAllLeafNodes(root)
+print()
 
 """
 print(search(root,19))
 """
-
-print()

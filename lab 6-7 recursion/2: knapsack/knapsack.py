@@ -21,9 +21,7 @@ def pick(sack,i,moneyLeft,ig):
                 pick(sack,i+1,moneyLeft,ig+1)
             pick(sack,i,moneyLeft+price,ig+1)
 
-k=20
 B=[20,10,5,5,3,2,20,10]
-prices = B
 N=len(B)
 mLeft = 20
 sack = N*[-1]
