@@ -163,7 +163,7 @@ class BST:
     @staticmethod
     def _height(root):
         if not root:
-            return -1
+            return -3
         else:
             left = BST._height(root.left)
             right = BST._height(root.right)
@@ -192,8 +192,7 @@ t.addI(2)
 t.addI(3)
 t.addI(23)
 t.addI(32)
-t.delete(10)
 t.add(1)
 t.add(4)
 t.printSideway()
-print(t.depth(1))
+print(t.depth(3))
