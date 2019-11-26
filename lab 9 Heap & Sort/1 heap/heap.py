@@ -12,14 +12,14 @@ def insertMinHeap(h,i):
     print('insert',h[i],'at index',i,end='    ')
     print(h)
     insertEle = h[i]
-    fi = (i-1)//2
+    fi = (i-1)//2 # father index
     while i > 0 and insertEle < h[fi]:
         h[i] = h[fi]
         i=fi
         fi = (i-1)//2
     h[i] = insertEle
 
-h = [30,85,97,100,200]
+h = [30,97,85,100,200]
 for i in range(1,len(h)):
     insertMinHeap(h,i)
     print(h)
@@ -44,10 +44,10 @@ def delMin(h,last):
         else:
             found = True
     h[hole] = insertEle
-
+"""
 h= [1,4,2,3,8,7]
 for last in range(len(h)-1,-1,-1):
     delMin(h,last)
     print(h)
     print90(h,0,last)
-    print('-------------------\n')
+    print('-------------------\n')"""
