@@ -11,5 +11,16 @@ def bubble_sort(arr:list):
             if arr[j] > arr[j+1]:
                 arr[j], arr[j+1] = arr[j+1], arr[j]
 
-bubble_sort(arr)
+def recursive_bubble_sort(arr:list,index=0):
+    if index == len(arr)-1:
+            return
+    
+    for i in range(len(arr)-index-1):
+        if arr[i] > arr[i+1]:
+                arr[i],arr[i+1] = arr[i+1],arr[i]
+
+    recursive_bubble_sort(arr,i+1)
+
+
+recursive_bubble_sort(arr)
 print(arr)
