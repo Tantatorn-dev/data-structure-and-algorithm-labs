@@ -61,6 +61,22 @@ class Graph:
                     stack.append(i)
                     visited[i] = True
         print()
+    
+    def DFS_recur(self,s):
+        visited = [False]*(len(self.graph))
+
+        Graph._DFS_recur(self.graph,s,visited)
+        print()
+
+    @staticmethod
+    def _DFS_recur(graph,start,visited):
+        
+        visited[start] = True
+        print(start,end=" ")
+        
+        for i in graph[start]:
+            if visited[i] == False:
+                Graph._DFS_recur(graph,i,visited)       
 
 
 g = Graph()
@@ -72,5 +88,4 @@ g.addEdge(1,4)
 g.addEdge(4,1)
 g.addEdge(2, 3) 
 g.addEdge(3, 2) 
-print(g)
-g.DFS(2)
+g.DFS_recur(2)
