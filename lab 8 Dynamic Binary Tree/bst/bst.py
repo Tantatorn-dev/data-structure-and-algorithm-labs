@@ -76,6 +76,22 @@ class BST:
             BST._preOrder(root.left)
             BST._preOrder(root.right)
 
+    def levelOrder(self):
+        queue = []
+        queue.append(self.root)
+
+        while queue:
+
+            root = queue.pop(0)
+            print(root.data, end=" ")
+
+            if root.left is not None:
+                queue.append(root.left)
+            if root.right is not None:
+                queue.append(root.right)
+        
+        print()
+
     def postOrder(self):
         BST._postOrder(self.root)
         print()
@@ -194,5 +210,4 @@ t.addI(23)
 t.addI(32)
 t.add(1)
 t.add(4)
-t.printSideway()
-print(t.depth(3))
+t.levelOrder()
